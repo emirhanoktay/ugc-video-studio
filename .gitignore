@@ -1,0 +1,33 @@
+# Environment variables (API keys)
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+
+# Runtime data
+mini-app/data/jobs.json
+mini-app/data/personas.json
+mini-app/data/personas/
+mini-app/uploads/
+
+# User photos / assets
+photos/
+
+# Course materials (private)
+BURADAN-BASLA.md
+dokumanlar/
+ugc-video-studio/
+mini-app-builder/
+.claude/skills/
+
+# Claude Code local settings
+.claude/settings.local.json
+.mcp.json
+
+# OS
+.DS_Store
+
+# Logs
+*.log

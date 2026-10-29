@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>UGC Video Studio — Local</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <span class="logo">🎬</span>
+    <span>UGC Video Studio <em>local</em></span>
+  </div>
+  <div class="header-right">
+    <div id="balancePill" class="balance-pill" style="display:none">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 100 4 2 2 0 000-4z"/></svg>
+      <span>Bakiye: </span><strong id="balanceAmount">…</strong>
+    </div>
+    <div id="health" class="health">…</div>
+  </div>
+</header>
+
+<main>
+  <!-- Cost Hero -->
+  <section class="hero">
+    <div class="cost-display">
+      <div class="cost-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v12"/>
+          <path d="M9 9.5C9 8.12 10.34 7 12 7s3 1.12 3 2.5-1.34 2.5-3 2.5-3 1.12-3 2.5 1.34 2.5 3 2.5"/>
+        </svg>
+      </div>
+      <strong id="costTotal" class="cost-amount">$ 1<span class="cost-dec">.21</span></strong>
+    </div>
+    <small id="costBreakdown" class="cost-breakdown">video $1.20 + altyazı $0.01</small>
+  </section>
+
+  <!-- Pill Selector Bar -->
+  <section class="pill-bar">
+    <div class="pill pill-green pill-select">
+      <select id="style">
+        <option value="samimi-itiraf">Samimi İtiraf</option>
+        <option value="heyecanli-kesif">Heyecanlı Keşif</option>
+        <option value="problem-cozum">Problem–Çözüm</option>
+        <option value="sokak-roportaji">Sokak Röportajı</option>
+        <option value="luks-estetik">Lüks / Estetik</option>
+        <option value="komik-eglenceli">Komik / Eğlenceli</option>
+        <option value="uzman-tavsiyesi">Uzman Tavsiyesi</option>
+        <option value="once-sonra">Önce–Sonra</option>
+      </select>
+      <span class="pill-label">Tarz</span>
+    </div>
+
+    <div class="pill pill-yellow pill-select">
+      <select id="duration">
+        <option value="4s">4 sn</option>
+        <option value="6s">6 sn</option>
+        <option value="8s" selected>8 sn</option>
+        <option value="10">10 sn</option>
+        <option value="12">12 sn</option>
+        <option value="15">15 sn</option>
+      </select>
+      <span class="pill-label">Süre</span>
+    </div>
+
+    <div class="pill pill-lilac pill-select">
+      <select id="level">
+        <option value="ekonomik">Ekonomik</option>
+        <option value="standart" selected>Standart</option>
+        <option value="premium">Premium</option>
+      </select>
+      <span class="pill-label">Kalite</span>
+    </div>
+
+    <div class="pill-persona-wrap">
+      <div class="pill pill-pink" id="personaPillBtn">
+        <span id="personaPillText" class="pill-persona-text">AI oluştursun</span>
+        <span class="pill-label">Kişi</span>
+      </div>
+      <div id="personaDropdown" class="persona-dropdown" style="display:none">
+        <div id="personaSelector" class="persona-selector"></div>
+      </div>
+    </div>
+
+    <div class="pill-spacer"></div>
+
+    <button id="produceBtn" class="produce-btn">Video Oluştur</button>
+  </section>
+
+  <div id="produceMsg" class="msg produce-msg"></div>
+
+  <!-- Two-Column Panels -->
+  <div class="panels">
+    <!-- Left: Tabbed Card -->
+    <section class="card card-left">
+      <div class="tab-header">
+        <button class="tab active" data-tab="create">Oluştur</button>
+        <button class="tab" data-tab="videos">Videolarım</button>
+        <button class="tab" data-tab="personas">Kişiler</button>
+      </div>
+
+      <!-- Oluştur -->
+      <div class="tab-pane active" id="tab-create">
+        <label>Ürün / marka *
+          <input id="product" type="text" placeholder="Örn: Glowly yüz serumu" />
+        </label>
+        <label>Öne çıkacak fayda
+          <input id="benefit" type="text" placeholder="Örn: kuru cildi 3 haftada parlatır" />
+        </label>
+        <label>Ürün görseli (opsiyonel)
+          <input id="image" type="file" accept="image/*" />
+          <small id="imageStatus" class="hint">Kişi + ürün görseli birlikte seçilirse otomatik birleştirilir.</small>
+        </label>
+        <label>Diyalog (opsiyonel — boşsa AI yazar)
+          <textarea id="dialog" rows="3" placeholder="Örn: Cildim hep matlaşıyordu. Bunu 3 haftadır kullanıyorum — sabah aynaya bakmak keyif artık."></textarea>
+        </label>
+      </div>
+
+      <!-- Videolarım -->
+      <div class="tab-pane" id="tab-videos" style="display:none">
+        <div id="jobs" class="jobs">
+          <div class="empty">Henüz üretim yok.</div>
+        </div>
+      </div>
+
+      <!-- Kişiler -->
+      <div class="tab-pane" id="tab-personas" style="display:none">
+        <div class="persona-form">
+          <div class="row">
+            <input id="personaName" type="text" placeholder="İsim" />
+            <label class="persona-photo-label">
+              <input id="personaPhoto" type="file" accept="image/*" />
+              <span class="persona-photo-btn">Fotoğraf</span>
+            </label>
+            <button id="personaSaveBtn" class="btn-sm">Kaydet</button>
+          </div>
+          <div id="personaMsg" class="msg"></div>
+        </div>
+        <div id="personaList" class="persona-list">
+          <div class="empty">Henüz kişi eklenmedi.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: Aktivite -->
+    <section class="card card-right">
+      <div class="activity-header">
+        <h2>Aktivite</h2>
+        <span id="activityCount" class="activity-count"></span>
+      </div>
+
+      <div id="composePreview" class="compose-preview" style="display:none">
+        <div class="activity-card activity-compose">
+          <div class="activity-card-title">Görsel Birleştirme</div>
+          <img id="composeImage" src="" alt="Önizleme" />
+          <div class="compose-actions">
+            <button id="composeApproveBtn" class="btn-sm">Onayla</button>
+            <button id="composeRetryBtn" class="btn-sm btn-outline">Yeniden Üret</button>
+          </div>
+          <div id="composeMsg" class="msg"></div>
+        </div>
+      </div>
+
+      <div id="activity" class="activity">
+        <div class="empty">Henüz aktivite yok.</div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <small>
+    Modeller: Veo 3.1 (Lite/Fast/Standart), Seedance 2.0 Fast, auto-subtitle.
+    fal.ai üzerinden çalışır. API key <code>.env</code>'den okunur.
+  </small>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>

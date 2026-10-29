@@ -1,0 +1,8 @@
+node_modules/
+.env
+data/jobs.json
+data/personas.json
+data/personas/
+uploads/
+*.log
+.DS_Store
